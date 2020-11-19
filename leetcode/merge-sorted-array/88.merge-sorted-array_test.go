@@ -7,15 +7,17 @@ import (
 
 
 type question88 struct {
-	para4
-	ans4
+	para88
+	ans88
 }
 
 // para 是参数
 // one 代表第一个参数
 type para88 struct {
 	nums1 []int
+	m int
 	nums2 []int
+	n int
 }
 
 // ans 是答案
@@ -28,7 +30,7 @@ func TestProblem88(t *testing.T) {
 	qs := []question88{
 
 		{
-			para88{[]int{1,2,3, 0, 0, 0}, []int{2, 5, 6}},
+			para88{[]int{1,2,3, 0, 0, 0}, 3, []int{2, 5, 6}, 3},
 			ans88{[]int{1,2, 2, 3, 5, 6}},
 		},
 	}
@@ -37,10 +39,12 @@ func TestProblem88(t *testing.T) {
 
 	for _, q := range qs {
 		expect, p := q.ans88.nums, q.para88
-		actual := merge(p.nums1, len(p.nums1), p.nums2, len(p.nums2))
-		fmt.Printf("【input】:%v       【output】:%v\n", p, actual)
-		if actual != expect {
-			t.Errorf("Expect: %v", expect)
+		fmt.Printf("[Input] %v", p)
+		merge(p.nums1, p.m, p.nums2, p.n)
+		for i, v := range expect {
+			if v != p.nums1[i] {
+				t.Errorf("Expect: %v Actual: %v", expect, p.nums1)
+			}
 		}
 	}
 	fmt.Printf("\n\n\n")
